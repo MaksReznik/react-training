@@ -1,0 +1,15 @@
+main {
+  background-color: #bef8f8;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  border-radius: 12px;
+  padding: 30px;
+  max-height: 90%;
+  overflow-y: auto;
+  background-color: #f6ffff;
+}

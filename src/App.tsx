@@ -1,25 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import LoginContainer from './pages/login/components/LoginContainer/LoginContainer';
+import GeneralLayout from './shared/layouts/GeneralLayout/GeneralLayout';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route element={<GeneralLayout />}>
+        <Route element={<LoginContainer></LoginContainer>} path="/"></Route>
+        <Route element={<Navigate to="/" />} path="*"></Route>
+      </Route>
+    </Routes>
   );
 }
 
