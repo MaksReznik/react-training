@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import LoginContainer from './pages/login/components/LoginContainer/LoginContainer';
+import LoginContainer from './pages/authentification/components/LoginContainer/LoginContainer';
 import GeneralLayout from './shared/layouts/GeneralLayout/GeneralLayout';
 
 function App() {

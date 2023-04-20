@@ -1,4 +1,6 @@
 body {
+  box-sizing: border-box;
+  color: rgb(15, 154, 154);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -6,7 +8,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+input {
+  color: rgb(15, 154, 154);
+  border-color: rgb(15, 154, 154);
+  background-color: rgb(249, 255, 255);
+  border-radius: 4px;
+  display: block;
+  font-size: 16px;
+  padding: 5px;
+  border-style: solid;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

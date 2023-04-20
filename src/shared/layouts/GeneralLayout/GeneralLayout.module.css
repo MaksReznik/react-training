@@ -9,6 +9,7 @@ main {
 .container {
   border-radius: 12px;
   padding: 30px;
+  min-width: 50%;
   max-height: 90%;
   overflow-y: auto;
   background-color: #f6ffff;
