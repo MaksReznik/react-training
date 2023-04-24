@@ -5,7 +5,7 @@ import LoginContainer from './pages/authentification/components/LoginContainer/L
 import GeneralLayout from './shared/layouts/GeneralLayout/GeneralLayout';
 import { store } from './state';
 import { Provider } from 'react-redux';
-import ProductsView from './pages/products/components/ProductsView/ProductsView';
+import ProductsPage from './pages/products/components/ProductsPage/ProductsPage';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Route element={<GeneralLayout />}>
           <Route element={<LoginContainer></LoginContainer>} path="/"></Route>
           <Route
-            element={<ProductsView></ProductsView>}
+            element={<ProductsPage></ProductsPage>}
             path="/products"
           ></Route>
           <Route element={<Navigate to="/" />} path="*"></Route>

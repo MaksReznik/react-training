@@ -11,7 +11,8 @@ body {
 *:after {
   box-sizing: inherit;
 }
-input {
+input,
+button {
   color: #0f9a9a;
   border-color: #0f9a9a;
   background-color: #f9ffff;
