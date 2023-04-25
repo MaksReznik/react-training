@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import AddProductModal from '../AddProductModal/AddProductModal';
 import ProductsView from '../ProductsView/ProductsView';
 import css from './ProductsPage.module.css';
 
 const ProductsPage = () => {
   const [modalOpened, setModalOpened] = useState(false);
+  const { t, i18n } = useTranslation();
   const changeModalState = (newState: boolean) => {
     setModalOpened(newState);
   };
@@ -15,13 +17,14 @@ const ProductsPage = () => {
           close={() => changeModalState(false)}
         ></AddProductModal>
       )}
+
       <div className={css.products__header}>
-        <h3>Products</h3>
+        <h3>{t('products.productTitle')}</h3>
         <button
           onClick={() => setModalOpened(true)}
           className={css.products__header__button}
         >
-          New Product
+          {t('products.newButton')}
         </button>
       </div>
       <ProductsView></ProductsView>

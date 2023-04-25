@@ -1,0 +1,14 @@
+{
+  "global": {
+    "submitText": "Submit"
+  },
+  "login": {
+    "title": "Login"
+  },
+  "products": {
+    "inputProductHeader": "Product header",
+    "inputProductText": "Product text",
+    "newButton": "New Product",
+    "productTitle": "Products"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "global": {
+    "submitText": "Підтвердити"
+  },
+  "login": {
+    "title": "Логін"
+  },
+  "products": {
+    "inputProductHeader": "Заголовок продукту",
+    "inputProductText": "Текст продукту",
+    "newButton": "Новий продукт",
+    "productTitle": "Продукти"
+  }
+}

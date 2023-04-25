@@ -17,10 +17,10 @@ button {
   border-color: #0f9a9a;
   background-color: #f9ffff;
   border-radius: 4px;
-  display: block;
   font-size: 16px;
   padding: 5px;
   border-style: solid;
+  cursor: pointer;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;

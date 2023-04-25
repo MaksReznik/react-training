@@ -1,12 +1,20 @@
-main {
-  background-color: #bef8f8;
+header {
+  background-color: #e2f8f8;
+  padding: 5px;
+  max-height: 42px;
+}
+.container {
   width: 100vw;
   height: 100vh;
+}
+main {
+  height: calc(100% - 42px);
+  background-color: #bef8f8;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.container {
+.main__container {
   border-radius: 12px;
   padding: 30px;
   max-height: 90%;

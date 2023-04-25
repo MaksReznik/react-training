@@ -17,11 +17,6 @@ export const productsSlice = createSlice({
       state.push(action.payload);
     },
     deleteProduct: (state, action: PayloadAction<string>) => {
-      console.log(
-        action.payload,
-        state.findIndex((el) => el.id === action.payload)
-      );
-
       state.splice(
         state.findIndex((el) => el.id === action.payload),
         1
