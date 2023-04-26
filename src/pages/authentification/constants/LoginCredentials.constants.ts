@@ -1,4 +1,4 @@
-import { LoginForm } from '../interfaces/login-form.interface';
+import { LoginForm } from '../interfaces/LoginForm.interface';
 
 export const LoginCredentials: LoginForm = {
   username: '123456',

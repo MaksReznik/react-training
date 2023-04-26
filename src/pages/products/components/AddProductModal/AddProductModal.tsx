@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Product } from '../../../../shared/interfaces/Product.interface';
 import { addProduct } from '../../../../state/slices/Products.slice';
-import { ModalProps } from '../../interfaces/ModalProps';
+import { ModalProps } from '../../interfaces/ModalProps.interface';
 import css from './AddProductModal.module.css';
 
 const AddProductModal = ({ close }: ModalProps) => {

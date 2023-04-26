@@ -2,9 +2,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { PWD_REGEX } from '../../../../shared/constants/regex.constants';
+import { PWD_REGEX } from '../../../../shared/constants/Regex.constants';
 import { LoginCredentials } from '../../constants/LoginCredentials.constants';
-import { LoginForm } from '../../interfaces/login-form.interface';
+import { LocalStorageLoginKeys } from '../../enums/LocalStorageLoginKeys.enum';
+import { LoginForm } from '../../interfaces/LoginForm.interface';
 import css from './LoginContainer.module.css';
 
 const LoginContainer = () => {
@@ -16,6 +17,10 @@ const LoginContainer = () => {
       alert('Incorrect credentials');
       return;
     }
+    localStorage.setItem(
+      LocalStorageLoginKeys.authCredentials,
+      JSON.stringify(data)
+    );
     navigate('/products');
   };
   return (

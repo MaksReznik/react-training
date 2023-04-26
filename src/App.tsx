@@ -6,6 +6,7 @@ import GeneralLayout from './shared/layouts/GeneralLayout/GeneralLayout';
 import { store } from './state';
 import { Provider } from 'react-redux';
 import ProductsPage from './pages/products/components/ProductsPage/ProductsPage';
+import { AuthGuard } from './pages/authentification/guards/Authentification.guard';
 
 function App() {
   return (
@@ -13,10 +14,9 @@ function App() {
       <Routes>
         <Route element={<GeneralLayout />}>
           <Route element={<LoginContainer></LoginContainer>} path="/"></Route>
-          <Route
-            element={<ProductsPage></ProductsPage>}
-            path="/products"
-          ></Route>
+          <Route path="/products" element={<AuthGuard />}>
+            <Route path="/products" element={<ProductsPage />} />
+          </Route>
           <Route element={<Navigate to="/" />} path="*"></Route>
         </Route>
       </Routes>

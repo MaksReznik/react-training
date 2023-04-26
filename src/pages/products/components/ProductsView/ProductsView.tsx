@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../../../shared/hooks/redux.hooks';
+import { useAppSelector } from '../../../../shared/hooks/Redux.hooks';
 import { Product } from '../../../../shared/interfaces/Product.interface';
 import { RootState } from '../../../../state';
 import { deleteProduct } from '../../../../state/slices/Products.slice';
