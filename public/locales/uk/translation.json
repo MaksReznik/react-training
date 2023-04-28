@@ -9,6 +9,7 @@
     "inputProductHeader": "Заголовок продукту",
     "inputProductText": "Текст продукту",
     "newButton": "Новий продукт",
-    "productTitle": "Продукти"
+    "productTitle": "Продукти",
+    "inputProductTypeSelect": "Тип продукту"
   }
 }

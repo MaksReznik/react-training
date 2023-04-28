@@ -6,10 +6,18 @@
   row-gap: 20px;
 }
 .products__item {
-  border: solid 1px #0f9a9a;
+  border: solid 2px #0f9a9a;
   border-radius: 5px;
   padding: 5px;
   position: relative;
+}
+.products__item_sale {
+  border: solid 2px #9a0f47;
+  color: #9a0f47;
+}
+.products__item_disabled {
+  border: solid 2px #7b9f9f;
+  color: #7b9f9f;
 }
 .products__item__delete {
   position: absolute;

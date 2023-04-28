@@ -1,54 +1,71 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { Product } from '../../../../shared/interfaces/Product.interface';
-import { addProduct } from '../../../../state/slices/Products.slice';
-import { ModalProps } from '../../interfaces/ModalProps.interface';
+import {
+  addProduct,
+  changeModalState,
+} from '../../../../state/slices/Products.slice';
 import css from './AddProductModal.module.css';
+import { Modal, Radio, Select } from 'antd';
+import { RootState } from '../../../../state';
+import { useAppSelector } from '../../../../shared/hooks/Redux.hooks';
+import { Input, Form } from 'antd';
+import { ProductStatus } from '../../enums/ProductStatus.enum';
+import { productsTypes } from '../constants/ProductTypes.constant';
 
-const AddProductModal = ({ close }: ModalProps) => {
-  const { register, handleSubmit } = useForm<Product>();
-  const { t, i18n } = useTranslation();
+const AddProductModal = () => {
+  const [form] = Form.useForm();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const onSubmit = (data: Product) => {
+  const isAddModalOpened = useAppSelector(
+    (state: RootState) => state.products.isAddModalOpened
+  );
+  const onSubmit = () => {
+    const data = form.getFieldsValue();
     data.id = new Date().getTime().toString();
     dispatch(addProduct(data));
-    close();
+    form.resetFields();
+    dispatch(changeModalState(false));
   };
 
   return (
-    <div>
-      <div className={css.modal}>
-        <div className={css.modal__content}>
-          <span className={css.modal__close} onClick={close}>
-            &times;
-          </span>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h4 className={css.modal__content__heading}>
-              {t('products.inputProductHeader')}
-            </h4>
-            <input
-              className={css.modal__content__header}
-              {...register('header', { required: true })}
-            />
-            <h4 className={css.modal__content__heading}>
-              {t('products.inputProductText')}
-            </h4>
-            <input
-              className={css.modal__content__text}
-              {...register('text', {
-                required: true,
-              })}
-            />
-            <button className={css.modal__content__submit} type="submit">
-              {' '}
-              {t('global.submitText')}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <Modal
+      title="Basic Modal"
+      open={isAddModalOpened}
+      onCancel={() => dispatch(changeModalState(false))}
+      onOk={onSubmit}
+    >
+      <Form form={form} layout="vertical">
+        <Form.Item
+          label={t('products.inputProductHeader')}
+          rules={[{ required: true, message: 'Please input product header!' }]}
+          name="header"
+        >
+          <Input className={css.modal__content__header} />
+        </Form.Item>
+        <Form.Item
+          label={t('products.inputProductText')}
+          rules={[{ required: true, message: 'Please input product text!' }]}
+          name="text"
+        >
+          <Input className={css.modal__content__text} />
+        </Form.Item>
+        <Form.Item
+          name="type"
+          label={t('products.inputProductTypeSelect')}
+          rules={[{ required: true, message: 'Please select product type!' }]}
+        >
+          <Select options={productsTypes} />
+        </Form.Item>
+        <Form.Item name="status">
+          <Radio.Group>
+            <Radio value={ProductStatus.withoutSale}>Without sale</Radio>
+            <Radio value={ProductStatus.withSale}>Sale</Radio>
+            <Radio value={ProductStatus.notInStock}>Not in stock</Radio>
+          </Radio.Group>
+        </Form.Item>
+      </Form>
+    </Modal>
   );
 };
 

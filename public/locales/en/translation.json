@@ -9,6 +9,7 @@
     "inputProductHeader": "Product header",
     "inputProductText": "Product text",
     "newButton": "New Product",
-    "productTitle": "Products"
+    "productTitle": "Products",
+    "inputProductTypeSelect": "Product type"
   }
 }

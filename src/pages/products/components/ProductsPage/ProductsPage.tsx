@@ -1,27 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import AddProductModal from '../AddProductModal/AddProductModal';
 import ProductsView from '../ProductsView/ProductsView';
 import css from './ProductsPage.module.css';
+import { changeModalState } from '../../../../state/slices/Products.slice';
 
 const ProductsPage = () => {
-  const [modalOpened, setModalOpened] = useState(false);
-  const { t, i18n } = useTranslation();
-  const changeModalState = (newState: boolean) => {
-    setModalOpened(newState);
-  };
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
   return (
     <div className={css.products}>
-      {modalOpened && (
-        <AddProductModal
-          close={() => changeModalState(false)}
-        ></AddProductModal>
-      )}
+      <AddProductModal></AddProductModal>
 
       <div className={css.products__header}>
         <h3>{t('products.productTitle')}</h3>
         <button
-          onClick={() => setModalOpened(true)}
+          onClick={() => dispatch(changeModalState(true))}
           className={css.products__header__button}
         >
           {t('products.newButton')}
