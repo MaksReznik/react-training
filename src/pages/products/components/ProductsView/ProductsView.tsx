@@ -25,7 +25,7 @@ const ProductsView = () => {
             css.products__item_disabled
           }
               
-          }`}
+          `}
           key={product.id}
         >
           <span

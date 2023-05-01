@@ -1,9 +1,16 @@
 {
   "global": {
-    "submitText": "Submit"
+    "submitText": "Submit",
+    "validation": {
+      "notEntered": "Please fill out the field"
+    }
   },
   "login": {
-    "title": "Login"
+    "title": "Login",
+    "validation": {
+      "notInCorrectFormat": "The field is not in correct format",
+      "notMatchesPattern": "The field does not match the password"
+    }
   },
   "products": {
     "inputProductHeader": "Product header",

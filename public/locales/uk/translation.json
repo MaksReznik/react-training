@@ -1,9 +1,16 @@
 {
   "global": {
-    "submitText": "Підтвердити"
+    "submitText": "Підтвердити",
+    "validation": {
+      "notEntered": "Будь ласка заповніть поле"
+    }
   },
   "login": {
-    "title": "Логін"
+    "title": "Логін",
+    "validation": {
+      "notInCorrectFormat": "Поле не відповідає заданому типу",
+      "notMatchesPattern": "Поле не в коректному форматі"
+    }
   },
   "products": {
     "inputProductHeader": "Заголовок продукту",
