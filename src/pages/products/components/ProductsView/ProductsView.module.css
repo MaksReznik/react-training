@@ -1,9 +1,10 @@
 .products {
   display: grid;
-  grid-template-columns: 20% 20% 20% 20%;
-  width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  width: 600px;
   justify-content: space-between;
   row-gap: 20px;
+  column-gap: 10px;
 }
 .products__item {
   border: solid 2px #0f9a9a;

@@ -11,8 +11,8 @@ import { RootState } from '../../../../state';
 import { useAppSelector } from '../../../../shared/hooks/Redux.hooks';
 import { Input, Form } from 'antd';
 import { ProductStatus } from '../../enums/ProductStatus.enum';
-import { productsTypes } from '../constants/ProductTypes.constant';
-import { productValidationSchema } from '../constants/ProductValidationSchema.constants';
+import { productsTypes } from '../../constants/ProductTypes.constant';
+import { productValidationSchema } from '../../constants/ProductValidationSchema.constants';
 import { yupValidator } from '../../../../shared/constants/YupValidator.constants';
 
 const AddProductModal = () => {
@@ -47,7 +47,7 @@ const AddProductModal = () => {
 
   return (
     <Modal
-      title="Basic Modal"
+      title={t('products.newButton')}
       open={isAddModalOpened}
       onCancel={() => dispatch(changeModalState(false))}
       footer={[

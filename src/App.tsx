@@ -7,6 +7,7 @@ import { store } from './state';
 import { Provider } from 'react-redux';
 import ProductsPage from './pages/products/components/ProductsPage/ProductsPage';
 import { AuthGuard } from './pages/authentification/guards/Authentification.guard';
+import InformationComponent from './shared/components/InformationComponent/InformationComponent';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/products" element={<AuthGuard />}>
             <Route path="/products" element={<ProductsPage />} />
           </Route>
+          <Route path="/info" element={<InformationComponent />} />
           <Route element={<Navigate to="/" />} path="*"></Route>
         </Route>
       </Routes>

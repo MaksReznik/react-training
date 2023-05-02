@@ -12,7 +12,6 @@ const ProductsPage = () => {
   return (
     <div className={css.products}>
       <AddProductModal></AddProductModal>
-
       <div className={css.products__header}>
         <h3>{t('products.productTitle')}</h3>
         <button
