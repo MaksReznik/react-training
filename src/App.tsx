@@ -8,20 +8,23 @@ import { Provider } from 'react-redux';
 import ProductsPage from './pages/products/components/ProductsPage/ProductsPage';
 import { AuthGuard } from './pages/authentification/guards/Authentification.guard';
 import InformationComponent from './shared/components/InformationComponent/InformationComponent';
+import { AuthProvider } from './pages/authentification/components/AuthentificationContext/AuthentificationContext';
 
 function App() {
   return (
     <Provider store={store}>
-      <Routes>
-        <Route element={<GeneralLayout />}>
-          <Route element={<LoginContainer></LoginContainer>} path="/"></Route>
-          <Route path="/products" element={<AuthGuard />}>
-            <Route path="/products" element={<ProductsPage />} />
+      <AuthProvider>
+        <Routes>
+          <Route element={<GeneralLayout />}>
+            <Route element={<LoginContainer></LoginContainer>} path="/"></Route>
+            <Route path="/products" element={<AuthGuard />}>
+              <Route path="/products" element={<ProductsPage />} />
+            </Route>
+            <Route path="/info" element={<InformationComponent />} />
+            <Route element={<Navigate to="/" />} path="*"></Route>
           </Route>
-          <Route path="/info" element={<InformationComponent />} />
-          <Route element={<Navigate to="/" />} path="*"></Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </AuthProvider>
     </Provider>
   );
 }

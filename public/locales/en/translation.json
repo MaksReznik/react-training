@@ -3,6 +3,7 @@
     "submitText": "Submit",
     "informationLink": "Information",
     "informationBackLink": "Back",
+    "logoutLink": "Logout",
     "validation": {
       "notEntered": "Please fill out the field"
     }

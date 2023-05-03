@@ -1,20 +1,39 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../pages/authentification/components/AuthentificationContext/AuthentificationContext';
 import css from './GeneralLayout.module.css';
 
 const GeneralLayout = () => {
   const { t, i18n } = useTranslation();
+  const { logout, userStatus } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
+  const logoutAndRenavigate = () => {
+    logout().then(() => {
+      navigate('/');
+    });
+  };
   return (
     <div className={css.container}>
       <header>
         <div className={css.header__language}>
           Select Language
-          <button onClick={() => i18n.changeLanguage('en')}> En</button>
-          <button onClick={() => i18n.changeLanguage('uk')}> Uk</button>
+          <button
+            className={css.header__language__button}
+            onClick={() => i18n.changeLanguage('en')}
+          >
+            {' '}
+            En
+          </button>
+          <button
+            className={css.header__language__button}
+            onClick={() => i18n.changeLanguage('uk')}
+          >
+            {' '}
+            Uk
+          </button>
         </div>
         <div className={css.header__info}>
           {location.pathname === '/info' ? (
@@ -28,6 +47,11 @@ const GeneralLayout = () => {
             <Link className={css.header__info__link} to={'/info'}>
               {t('global.informationLink')}
             </Link>
+          )}
+        </div>
+        <div className={css.header__logout}>
+          {userStatus?.username && (
+            <span onClick={logoutAndRenavigate}>{t('global.logoutLink')}</span>
           )}
         </div>
       </header>

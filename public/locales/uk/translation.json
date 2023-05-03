@@ -3,6 +3,7 @@
     "submitText": "Підтвердити",
     "informationLink": "Інформація",
     "informationBackLink": "Назад",
+    "logoutLink": "Разлогінитись",
     "validation": {
       "notEntered": "Будь ласка заповніть поле"
     }

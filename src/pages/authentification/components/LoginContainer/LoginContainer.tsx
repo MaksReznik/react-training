@@ -1,36 +1,32 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { LoginCredentials } from '../../constants/LoginCredentials.constants';
-import { LocalStorageLoginKeys } from '../../enums/LocalStorageLoginKeys.enum';
 import { LoginForm } from '../../interfaces/LoginForm.interface';
 import css from './LoginContainer.module.css';
 import { Button, Input, Form } from 'antd';
 import { loginValidationSchema } from '../../constants/LoginValidationSchema.constants';
 import { yupValidator } from '../../../../shared/constants/YupValidator.constants';
+import { useAuth } from '../AuthentificationContext/AuthentificationContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginContainer = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const { register } = useForm<LoginForm>();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const { login } = useAuth();
   const yupValidate = yupValidator(loginValidationSchema, form.getFieldsValue);
-  const onSubmit = (data: LoginForm) => {
+
+  const onSubmit = async (data: LoginForm) => {
     setLoading(true);
-    if (JSON.stringify(data) !== JSON.stringify(LoginCredentials)) {
-      alert('Incorrect credentials');
-      setLoading(false);
-      return;
-    }
-    localStorage.setItem(
-      LocalStorageLoginKeys.authCredentials,
-      JSON.stringify(data)
-    );
+    login(data).then((isLoggedIn) => {
+      if (isLoggedIn) {
+        navigate('/products');
+      }
+    });
     setTimeout(() => {
       setLoading(false);
-      navigate('/products');
     }, 1000);
   };
   return (

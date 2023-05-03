@@ -1,14 +1,25 @@
 header {
-  justify-content: space-between;
-  display: flex;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
   background-color: rgb(226, 248, 248);
   padding: 5px;
   max-height: 42px;
+  div {
+    display: flex;
+    justify-content: center;
+  }
+}
+.header__language__button {
+  margin: 0 0 0 10px;
 }
 .header__info__link {
   cursor: pointer;
   text-decoration: none;
   color: rgb(15, 154, 154);
+}
+.header__logout {
+  cursor: pointer;
 }
 .container {
   width: 100vw;
