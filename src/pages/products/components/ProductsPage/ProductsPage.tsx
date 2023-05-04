@@ -5,21 +5,26 @@ import AddProductModal from '../AddProductModal/AddProductModal';
 import ProductsView from '../ProductsView/ProductsView';
 import css from './ProductsPage.module.css';
 import { changeModalState } from '../../../../state/slices/Products.slice';
+import { useAuth } from '../../../authentification/components/AuthentificationContext/AuthentificationContext';
+import { Roles } from '../../../authentification/enums/Roles.enum';
 
 const ProductsPage = () => {
   const { t } = useTranslation();
+  const { userStatus } = useAuth();
   const dispatch = useDispatch();
   return (
     <div className={css.products}>
       <AddProductModal></AddProductModal>
       <div className={css.products__header}>
         <h3>{t('products.productTitle')}</h3>
-        <button
-          onClick={() => dispatch(changeModalState(true))}
-          className={css.products__header__button}
-        >
-          {t('products.newButton')}
-        </button>
+        {userStatus.role === Roles.manager && (
+          <button
+            onClick={() => dispatch(changeModalState(true))}
+            className={css.products__header__button}
+          >
+            {t('products.newButton')}
+          </button>
+        )}
       </div>
       <ProductsView></ProductsView>
     </div>

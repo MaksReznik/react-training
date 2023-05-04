@@ -9,6 +9,7 @@ import ProductsPage from './pages/products/components/ProductsPage/ProductsPage'
 import { AuthGuard } from './pages/authentification/guards/Authentification.guard';
 import InformationComponent from './shared/components/InformationComponent/InformationComponent';
 import { AuthProvider } from './pages/authentification/components/AuthentificationContext/AuthentificationContext';
+import { Roles } from './pages/authentification/enums/Roles.enum';
 
 function App() {
   return (
@@ -17,10 +18,20 @@ function App() {
         <Routes>
           <Route element={<GeneralLayout />}>
             <Route element={<LoginContainer></LoginContainer>} path="/"></Route>
-            <Route path="/products" element={<AuthGuard />}>
+            <Route
+              path="/products"
+              element={
+                <AuthGuard canBeAccessedBy={[Roles.manager, Roles.user]} />
+              }
+            >
               <Route path="/products" element={<ProductsPage />} />
             </Route>
-            <Route path="/info" element={<InformationComponent />} />
+            <Route
+              path="/info"
+              element={<AuthGuard canBeAccessedBy={[Roles.user]} />}
+            >
+              <Route path="/info" element={<InformationComponent />} />
+            </Route>
             <Route element={<Navigate to="/" />} path="*"></Route>
           </Route>
         </Routes>

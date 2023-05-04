@@ -52,7 +52,7 @@ const AddProductModal = () => {
       onCancel={() => dispatch(changeModalState(false))}
       footer={[
         <Button key="back" onClick={() => dispatch(changeModalState(false))}>
-          Return
+          {t('global.backLink')}
         </Button>,
         <Button
           key="submit"
@@ -60,7 +60,7 @@ const AddProductModal = () => {
           loading={loading}
           onClick={onSubmit}
         >
-          Submit
+          {t('global.submitText')}
         </Button>,
       ]}
     >
@@ -84,13 +84,23 @@ const AddProductModal = () => {
           label={t('products.inputProductTypeSelect')}
           rules={[yupSync]}
         >
-          <Select options={productsTypes} />
+          <Select
+            options={productsTypes.map((type) => {
+              return { value: type.value, label: t(type.label) };
+            })}
+          />
         </Form.Item>
         <Form.Item rules={[yupSync]} name="status">
           <Radio.Group>
-            <Radio value={ProductStatus.withoutSale}>Without sale</Radio>
-            <Radio value={ProductStatus.withSale}>Sale</Radio>
-            <Radio value={ProductStatus.notInStock}>Not in stock</Radio>
+            <Radio value={ProductStatus.withoutSale}>
+              {t('products.productStatus.withoutSale')}
+            </Radio>
+            <Radio value={ProductStatus.withSale}>
+              {t('products.productStatus.sale')}
+            </Radio>
+            <Radio value={ProductStatus.notInStock}>
+              {t('products.productStatus.notInStock')}
+            </Radio>
           </Radio.Group>
         </Form.Item>
       </Form>

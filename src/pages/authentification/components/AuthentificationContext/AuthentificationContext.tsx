@@ -16,7 +16,7 @@ import { Roles } from '../../enums/Roles.enum';
 import { LoginForm } from '../../interfaces/LoginForm.interface';
 
 export const AuthContext = createContext({
-  userStatus: { username: '', password: '', role: 'user' },
+  userStatus: { username: '', password: '', role: Roles.user },
   login: async (credentials: LoginForm): Promise<boolean> => {
     let role;
     if (
@@ -52,17 +52,17 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: any) => {
-  useEffect(() => {
+  let userStatus = useSelector((state: RootState) => state.authentificaiton);
+  if (!userStatus.username) {
     const authState = localStorage.getItem(
       LocalStorageLoginKeys.authCredentials
     );
     if (authState) {
-      store.dispatch(setCredentials(JSON.parse(authState)));
+      userStatus = JSON.parse(authState);
+      store.dispatch(setCredentials(userStatus));
     }
-  }, []);
+  }
   const { login, logout } = useAuth();
-  const userStatus = useSelector((state: RootState) => state.authentificaiton);
   const values = { login, logout, userStatus };
-
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };

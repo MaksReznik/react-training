@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
+import { Roles } from '../../pages/authentification/enums/Roles.enum';
 import { AuthentificationState } from '../../shared/interfaces/AuthentificationState.interface';
 
 const initialState: AuthentificationState = {
   username: '',
   password: '',
-  role: 'user',
+  role: Roles.user,
 };
 
 export const authentificationSlice = createSlice({

@@ -2,7 +2,7 @@
   "global": {
     "submitText": "Підтвердити",
     "informationLink": "Інформація",
-    "informationBackLink": "Назад",
+    "backLink": "Назад",
     "logoutLink": "Разлогінитись",
     "validation": {
       "notEntered": "Будь ласка заповніть поле"
@@ -14,6 +14,8 @@
   },
   "login": {
     "title": "Логін",
+    "username": "Ім'я",
+    "password": "Пароль",
     "validation": {
       "notInCorrectFormat": "Поле не відповідає заданому типу",
       "notMatchesPattern": "Поле не в коректному форматі"
@@ -24,6 +26,16 @@
     "inputProductText": "Текст продукту",
     "newButton": "Новий продукт",
     "productTitle": "Продукти",
-    "inputProductTypeSelect": "Тип продукту"
+    "inputProductTypeSelect": "Тип продукту",
+    "productStatus": {
+      "withoutSale": "Скидки немає",
+      "sale": "Скидка",
+      "notInStock": "Не в наявності"
+    },
+    "productsTypes": {
+      "electronic": "Електроніка",
+      "medical": "Медичний",
+      "other": "Інше"
+    }
   }
 }

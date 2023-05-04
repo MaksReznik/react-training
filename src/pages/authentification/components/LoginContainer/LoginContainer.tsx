@@ -35,7 +35,7 @@ const LoginContainer = () => {
       <Form form={form} layout="vertical" onFinish={onSubmit}>
         <Form.Item
           className={css.login__username}
-          label="Username"
+          label={t('login.username')}
           name="username"
           rules={[yupValidate]}
         >
@@ -43,7 +43,7 @@ const LoginContainer = () => {
         </Form.Item>
         <Form.Item
           className={css.login__password}
-          label="Password"
+          label={t('login.password')}
           name="password"
           rules={[yupValidate]}
         >

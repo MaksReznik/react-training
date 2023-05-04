@@ -1,9 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { LocalStorageLoginKeys } from '../enums/LocalStorageLoginKeys.enum';
+import { useAuth } from '../components/AuthentificationContext/AuthentificationContext';
+import { AuthGuardProps } from '../interfaces/AuthGuardProps.interface';
 
-export function AuthGuard() {
-  const isAuthenticated = !!localStorage.getItem(
-    LocalStorageLoginKeys.authCredentials
+export function AuthGuard({ canBeAccessedBy }: AuthGuardProps) {
+  const { userStatus } = useAuth();
+  return !!userStatus.username && canBeAccessedBy.includes(userStatus.role) ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/" />
   );
-  return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 }
