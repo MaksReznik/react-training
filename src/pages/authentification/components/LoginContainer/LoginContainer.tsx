@@ -36,24 +36,7 @@ const LoginContainer = () => {
           className={css.login__username}
           label={t('login.username')}
           name="username"
-          rules={[
-            {
-              validator: (field: any, value: any) => {
-                // console.log(schema, field, value);
-                // console.log({ [field.fullField]: value });
-                //console.log(loginValidationSchema.validateSyncAt('username', '1234'));
-
-                try {
-                  loginValidationSchema.validateSyncAt(field.field, value);
-                  //loginValidationSchema.validateSync({ [field.fullField]: value });
-                } catch (error: any) {
-                  console.log(error.message);
-                  const translatedErrorMessage = t(error.message);
-                  return Promise.reject(new Error(translatedErrorMessage));
-                }
-              },
-            },
-          ]}
+          rules={[{ validator }]}
         >
           <Input />
         </Form.Item>
