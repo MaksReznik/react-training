@@ -18,7 +18,7 @@ import { yupValidator } from '../../../../shared/constants/YupValidator.constant
 const AddProductModal = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm();
-  const yupSync = yupValidator(productValidationSchema, form.getFieldsValue);
+  const validator = yupValidator(productValidationSchema);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isAddModalOpened = useAppSelector(
@@ -67,14 +67,14 @@ const AddProductModal = () => {
       <Form form={form} layout="vertical">
         <Form.Item
           label={t('products.inputProductHeader')}
-          rules={[yupSync]}
+          rules={[{ validator }]}
           name="header"
         >
           <Input className={css.modal__content__header} />
         </Form.Item>
         <Form.Item
           label={t('products.inputProductText')}
-          rules={[yupSync]}
+          rules={[{ validator }]}
           name="text"
         >
           <Input className={css.modal__content__text} />
@@ -82,7 +82,7 @@ const AddProductModal = () => {
         <Form.Item
           name="type"
           label={t('products.inputProductTypeSelect')}
-          rules={[yupSync]}
+          rules={[{ validator }]}
         >
           <Select
             options={productsTypes.map((type) => {
@@ -90,7 +90,7 @@ const AddProductModal = () => {
             })}
           />
         </Form.Item>
-        <Form.Item rules={[yupSync]} name="status">
+        <Form.Item rules={[{ validator }]} name="status">
           <Radio.Group>
             <Radio value={ProductStatus.withoutSale}>
               {t('products.productStatus.withoutSale')}

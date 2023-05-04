@@ -16,8 +16,7 @@ const LoginContainer = () => {
   const { register } = useForm<LoginForm>();
   const { t } = useTranslation();
   const { login } = useAuth();
-  const yupValidate = yupValidator(loginValidationSchema, form.getFieldsValue);
-
+  const validator = yupValidator(loginValidationSchema);
   const onSubmit = async (data: LoginForm) => {
     setLoading(true);
     login(data).then((isLoggedIn) => {
@@ -37,17 +36,34 @@ const LoginContainer = () => {
           className={css.login__username}
           label={t('login.username')}
           name="username"
-          rules={[yupValidate]}
+          rules={[
+            {
+              validator: (field: any, value: any) => {
+                // console.log(schema, field, value);
+                // console.log({ [field.fullField]: value });
+                //console.log(loginValidationSchema.validateSyncAt('username', '1234'));
+
+                try {
+                  loginValidationSchema.validateSyncAt(field.field, value);
+                  //loginValidationSchema.validateSync({ [field.fullField]: value });
+                } catch (error: any) {
+                  console.log(error.message);
+                  const translatedErrorMessage = t(error.message);
+                  return Promise.reject(new Error(translatedErrorMessage));
+                }
+              },
+            },
+          ]}
         >
-          <Input {...register('username', { required: true })} />
+          <Input />
         </Form.Item>
         <Form.Item
           className={css.login__password}
           label={t('login.password')}
           name="password"
-          rules={[yupValidate]}
+          rules={[{ validator }]}
         >
-          <Input {...register('password')} />
+          <Input />
         </Form.Item>
         <Form.Item>
           <Button
