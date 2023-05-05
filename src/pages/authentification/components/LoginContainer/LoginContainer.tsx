@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoginForm } from '../../interfaces/LoginForm.interface';
 import css from './LoginContainer.module.css';
@@ -8,12 +7,12 @@ import { loginValidationSchema } from '../../constants/LoginValidationSchema.con
 import { yupValidator } from '../../../../shared/constants/YupValidator.constants';
 import { useAuth } from '../AuthentificationContext/AuthentificationContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginContainer = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const { register } = useForm<LoginForm>();
   const { t } = useTranslation();
   const { login } = useAuth();
   const validator = yupValidator(loginValidationSchema);
@@ -28,6 +27,17 @@ const LoginContainer = () => {
       setLoading(false);
     }, 1000);
   };
+
+  useEffect(() => {
+    (async () => {
+      const options = {
+        method: 'GET',
+        url: 'https://gutendex.com/books/',
+      };
+      console.log(await axios.request(options));
+    })();
+  }, []); //just to test interceptors
+
   return (
     <div className={css.login}>
       <h2>{t('login.title')}</h2>
