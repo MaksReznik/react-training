@@ -53,7 +53,9 @@ const GeneralLayout = () => {
         </div>
         <div className={css.header__logout}>
           {userStatus?.username && (
-            <span onClick={logoutAndRenavigate}>{t('global.logoutLink')}</span>
+            <span onClick={logoutAndRenavigate}>
+              {t('global.logoutLink')} : {userStatus.username}
+            </span>
           )}
         </div>
       </header>
