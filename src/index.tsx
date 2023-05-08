@@ -5,9 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import './i18n';
-import { runInterceptor } from './pages/authentification/interceptors/Authentification.intercepror';
 
-runInterceptor();
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

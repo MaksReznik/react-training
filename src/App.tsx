@@ -10,31 +10,37 @@ import { AuthGuard } from './pages/authentification/guards/Authentification.guar
 import InformationComponent from './shared/components/InformationComponent/InformationComponent';
 import { AuthProvider } from './pages/authentification/components/AuthentificationContext/AuthentificationContext';
 import { Roles } from './pages/authentification/enums/Roles.enum';
+import AxiosInterceptor from './pages/authentification/interceptors/Authentification.intercepror';
 
 function App() {
   return (
     <Provider store={store}>
       <AuthProvider>
-        <Routes>
-          <Route element={<GeneralLayout />}>
-            <Route element={<LoginContainer></LoginContainer>} path="/"></Route>
-            <Route
-              path="/products"
-              element={
-                <AuthGuard canBeAccessedBy={[Roles.manager, Roles.user]} />
-              }
-            >
-              <Route path="/products" element={<ProductsPage />} />
+        <AxiosInterceptor>
+          <Routes>
+            <Route element={<GeneralLayout />}>
+              <Route
+                element={<LoginContainer></LoginContainer>}
+                path="/"
+              ></Route>
+              <Route
+                path="/products"
+                element={
+                  <AuthGuard canBeAccessedBy={[Roles.manager, Roles.user]} />
+                }
+              >
+                <Route path="/products" element={<ProductsPage />} />
+              </Route>
+              <Route
+                path="/info"
+                element={<AuthGuard canBeAccessedBy={[Roles.user]} />}
+              >
+                <Route path="/info" element={<InformationComponent />} />
+              </Route>
+              <Route element={<Navigate to="/" />} path="*"></Route>
             </Route>
-            <Route
-              path="/info"
-              element={<AuthGuard canBeAccessedBy={[Roles.user]} />}
-            >
-              <Route path="/info" element={<InformationComponent />} />
-            </Route>
-            <Route element={<Navigate to="/" />} path="*"></Route>
-          </Route>
-        </Routes>
+          </Routes>
+        </AxiosInterceptor>
       </AuthProvider>
     </Provider>
   );

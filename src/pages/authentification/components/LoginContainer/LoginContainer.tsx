@@ -7,6 +7,7 @@ import { loginValidationSchema } from '../../constants/LoginValidationSchema.con
 import { yupValidator } from '../../../../shared/constants/YupValidator.constants';
 import { useAuth } from '../AuthentificationContext/AuthentificationContext';
 import { useNavigate } from 'react-router-dom';
+import instance from '../../interceptors/Authentification.intercepror';
 import axios from 'axios';
 
 const LoginContainer = () => {
@@ -34,7 +35,8 @@ const LoginContainer = () => {
         method: 'GET',
         url: 'https://gutendex.com/books/',
       };
-      console.log(await axios.request(options));
+      const resultBooks = await axios.request(options);
+      console.log(resultBooks);
     })();
   }, []); //just to test interceptors
 
