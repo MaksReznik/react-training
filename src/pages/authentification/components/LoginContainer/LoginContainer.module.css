@@ -1,6 +1,10 @@
 form {
   max-width: 300px;
 }
+.login__contacts {
+  cursor: pointer;
+  color: #0f9a9a;
+}
 .login__username,
 .login__password,
 .login__submit {

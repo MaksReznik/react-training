@@ -6,7 +6,7 @@ import { Button, Input, Form } from 'antd';
 import { loginValidationSchema } from '../../constants/LoginValidationSchema.constants';
 import { yupValidator } from '../../../../shared/constants/YupValidator.constants';
 import { useAuth } from '../AuthentificationContext/AuthentificationContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import instance from '../../interceptors/Authentification.intercepror';
 import axios from 'axios';
 
@@ -39,7 +39,6 @@ const LoginContainer = () => {
       console.log(resultBooks);
     })();
   }, []); //just to test interceptors
-
   return (
     <div className={css.login}>
       <h2>{t('login.title')}</h2>
@@ -70,6 +69,9 @@ const LoginContainer = () => {
           </Button>
         </Form.Item>
       </Form>
+      <Link className={css.login__contacts} to={'/contacts'}>
+        {t('contacts.contactUsLink')}
+      </Link>
     </div>
   );
 };

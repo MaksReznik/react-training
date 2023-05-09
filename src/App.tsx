@@ -11,6 +11,7 @@ import InformationComponent from './shared/components/InformationComponent/Infor
 import { AuthProvider } from './pages/authentification/components/AuthentificationContext/AuthentificationContext';
 import { Roles } from './pages/authentification/enums/Roles.enum';
 import AxiosInterceptor from './pages/authentification/interceptors/Authentification.intercepror';
+import ContactUsComponent from './shared/components/ContactUsComponent/ContactUsComponent';
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
               <Route
                 element={<LoginContainer></LoginContainer>}
                 path="/"
+              ></Route>
+              <Route
+                element={<ContactUsComponent></ContactUsComponent>}
+                path="/contacts"
               ></Route>
               <Route
                 path="/products"
