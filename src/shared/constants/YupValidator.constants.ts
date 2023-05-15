@@ -1,14 +1,50 @@
 import i18next from 'i18next';
+import { useCallback } from 'react';
+import { Schema } from 'yup';
 
-export const yupValidator = (schema: any) => (field: any, value: any) => {
-  //console.log(schema, field, value);
-  //console.log({ [field.fullField]: value });
+export const useYupValidationResolver = (validationSchema: Schema<any>) =>
+  useCallback(
+    (data: any) => {
+      console.log(data);
 
-  try {
-    schema.validateSyncAt(field.field, { value });
-  } catch (error: any) {
-    const translatedErrorMessage = i18next.t(error.message);
-    return Promise.reject(new Error(translatedErrorMessage));
-  }
-  return Promise.resolve();
-};
+      try {
+        const values = validationSchema.validateSync(data, {
+          abortEarly: false,
+        });
+        console.log('values', values);
+
+        return {
+          values,
+          errors: {},
+        };
+      } catch (errors: any) {
+        console.log('errors', {
+          values: {},
+          errors: errors.inner.reduce(
+            (allErrors: any, currentError: any) => ({
+              ...allErrors,
+              [currentError.path]: {
+                type: currentError.type ?? 'validation',
+                message: currentError.message,
+              },
+            }),
+            {}
+          ),
+        });
+        return {
+          values: {},
+          errors: errors.inner.reduce(
+            (allErrors: any, currentError: any) => ({
+              ...allErrors,
+              [currentError.path]: {
+                type: currentError.type ?? 'validation',
+                message: currentError.message,
+              },
+            }),
+            {}
+          ),
+        };
+      }
+    },
+    [validationSchema]
+  );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import {
@@ -12,37 +12,47 @@ import { useAppSelector } from '../../../../shared/hooks/Redux.hooks';
 import { Input, Form } from 'antd';
 import { ProductStatus } from '../../enums/ProductStatus.enum';
 import { productsTypes } from '../../constants/ProductTypes.constant';
-import { productValidationSchema } from '../../constants/ProductValidationSchema.constants';
-import { yupValidator } from '../../../../shared/constants/YupValidator.constants';
+import { useYupValidationResolver } from '../../../../shared/constants/YupValidator.constants';
+import { useForm } from 'react-hook-form';
+import FormItem from '../../../../shared/components/FormItem/FormItem';
+import { getProductValidationSchema } from '../../constants/ProductValidationSchema.constants';
+import { Product } from '../../../../shared/interfaces/Product.interface';
 
 const AddProductModal = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [form] = Form.useForm();
-  const validator = yupValidator(productValidationSchema);
   const { t } = useTranslation();
+  const validationSchema = useMemo(() => getProductValidationSchema(t), [t]);
+  const { control, getValues, reset, trigger } = useForm<Product>({
+    resolver: useYupValidationResolver(validationSchema),
+    defaultValues: {
+      text: '',
+      header: '',
+      type: undefined,
+      status: ProductStatus.withoutSale,
+    },
+  });
+
   const dispatch = useDispatch();
   const isAddModalOpened = useAppSelector(
     (state: RootState) => state.products.isAddModalOpened
   );
-  //TODO add translation for validation messages
   const onSubmit = () => {
     setLoading(true);
-    const data = form.getFieldsValue();
-    form
-      .validateFields()
-      .then(() => {
-        console.log(data);
-        data.id = new Date().getTime().toString();
-        dispatch(addProduct(data));
-        form.resetFields();
-        setTimeout(() => {
-          setLoading(false);
-          dispatch(changeModalState(false));
-        }, 1000);
-      })
-      .catch(() => {
+    trigger().then((isFormValid) => {
+      if (!isFormValid) {
         setLoading(false);
-      });
+        return;
+      }
+      const data = getValues();
+      console.log(data);
+      data.id = new Date().getTime().toString();
+      dispatch(addProduct(data));
+      reset();
+      setTimeout(() => {
+        setLoading(false);
+        dispatch(changeModalState(false));
+      }, 1000);
+    });
   };
 
   return (
@@ -64,45 +74,63 @@ const AddProductModal = () => {
         </Button>,
       ]}
     >
-      <Form form={form} layout="vertical">
-        <Form.Item
+      <Form layout="vertical">
+        <FormItem
+          className=""
           label={t('products.inputProductHeader')}
-          rules={[{ validator }]}
+          control={control}
+          hint=""
+          render={({ field }: any) => (
+            <Input className={css.modal__content__header} {...field} />
+          )}
           name="header"
-        >
-          <Input className={css.modal__content__header} />
-        </Form.Item>
-        <Form.Item
+        />
+        <FormItem
           label={t('products.inputProductText')}
-          rules={[{ validator }]}
           name="text"
-        >
-          <Input className={css.modal__content__text} />
-        </Form.Item>
-        <Form.Item
+          className=""
+          control={control}
+          hint=""
+          render={({ field }: any) => (
+            <Input className={css.modal__content__text} {...field} />
+          )}
+        />
+
+        <FormItem
           name="type"
           label={t('products.inputProductTypeSelect')}
-          rules={[{ validator }]}
-        >
-          <Select
-            options={productsTypes.map((type) => {
-              return { value: type.value, label: t(type.label) };
-            })}
-          />
-        </Form.Item>
-        <Form.Item rules={[{ validator }]} name="status">
-          <Radio.Group>
-            <Radio value={ProductStatus.withoutSale}>
-              {t('products.productStatus.withoutSale')}
-            </Radio>
-            <Radio value={ProductStatus.withSale}>
-              {t('products.productStatus.sale')}
-            </Radio>
-            <Radio value={ProductStatus.notInStock}>
-              {t('products.productStatus.notInStock')}
-            </Radio>
-          </Radio.Group>
-        </Form.Item>
+          className=""
+          control={control}
+          hint=""
+          render={({ field }: any) => (
+            <Select
+              {...field}
+              options={productsTypes.map((type) => {
+                return { value: type.value, label: t(type.label) };
+              })}
+            />
+          )}
+        />
+        <FormItem
+          name="status"
+          label={t('products.productStatus.label')}
+          className=""
+          control={control}
+          hint=""
+          render={({ field }: any) => (
+            <Radio.Group {...field}>
+              <Radio value={ProductStatus.withoutSale}>
+                {t('products.productStatus.withoutSale')}
+              </Radio>
+              <Radio value={ProductStatus.withSale}>
+                {t('products.productStatus.sale')}
+              </Radio>
+              <Radio value={ProductStatus.notInStock}>
+                {t('products.productStatus.notInStock')}
+              </Radio>
+            </Radio.Group>
+          )}
+        />
       </Form>
     </Modal>
   );

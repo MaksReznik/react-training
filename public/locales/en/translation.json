@@ -32,6 +32,7 @@
     "productTitle": "Products",
     "inputProductTypeSelect": "Product type",
     "productStatus": {
+      "label": "Sale status",
       "withoutSale": "Without sale",
       "sale": "Sale",
       "notInStock": "Not in stock"

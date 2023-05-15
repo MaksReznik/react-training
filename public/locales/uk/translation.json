@@ -32,8 +32,9 @@
     "productTitle": "Продукти",
     "inputProductTypeSelect": "Тип продукту",
     "productStatus": {
-      "withoutSale": "Скидки немає",
-      "sale": "Скидка",
+      "label": "Статус знижки",
+      "withoutSale": "Знижки немає",
+      "sale": "Знижка",
       "notInStock": "Не в наявності"
     },
     "productsTypes": {
