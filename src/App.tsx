@@ -12,41 +12,44 @@ import { AuthProvider } from './pages/authentification/components/Authentificati
 import { Roles } from './pages/authentification/enums/Roles.enum';
 import AxiosInterceptor from './pages/authentification/interceptors/Authentification.intercepror';
 import ContactUsComponent from './shared/components/ContactUsComponent/ContactUsComponent';
+import AntdThemeProvider from './shared/components/AntdThemeProvider/AntdThemeProvider';
 
 function App() {
   return (
     <Provider store={store}>
-      <AuthProvider>
-        <AxiosInterceptor>
-          <Routes>
-            <Route element={<GeneralLayout />}>
-              <Route
-                element={<LoginContainer></LoginContainer>}
-                path="/"
-              ></Route>
-              <Route
-                element={<ContactUsComponent></ContactUsComponent>}
-                path="/contacts"
-              ></Route>
-              <Route
-                path="/products"
-                element={
-                  <AuthGuard canBeAccessedBy={[Roles.manager, Roles.user]} />
-                }
-              >
-                <Route path="/products" element={<ProductsPage />} />
+      <AntdThemeProvider>
+        <AuthProvider>
+          <AxiosInterceptor>
+            <Routes>
+              <Route element={<GeneralLayout />}>
+                <Route
+                  element={<LoginContainer></LoginContainer>}
+                  path="/"
+                ></Route>
+                <Route
+                  element={<ContactUsComponent></ContactUsComponent>}
+                  path="/contacts"
+                ></Route>
+                <Route
+                  path="/products"
+                  element={
+                    <AuthGuard canBeAccessedBy={[Roles.manager, Roles.user]} />
+                  }
+                >
+                  <Route path="/products" element={<ProductsPage />} />
+                </Route>
+                <Route
+                  path="/info"
+                  element={<AuthGuard canBeAccessedBy={[Roles.user]} />}
+                >
+                  <Route path="/info" element={<InformationComponent />} />
+                </Route>
+                <Route element={<Navigate to="/" />} path="*"></Route>
               </Route>
-              <Route
-                path="/info"
-                element={<AuthGuard canBeAccessedBy={[Roles.user]} />}
-              >
-                <Route path="/info" element={<InformationComponent />} />
-              </Route>
-              <Route element={<Navigate to="/" />} path="*"></Route>
-            </Route>
-          </Routes>
-        </AxiosInterceptor>
-      </AuthProvider>
+            </Routes>
+          </AxiosInterceptor>
+        </AuthProvider>
+      </AntdThemeProvider>
     </Provider>
   );
 }

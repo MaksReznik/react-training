@@ -31,6 +31,12 @@
     "newButton": "New Product",
     "productTitle": "Products",
     "inputProductTypeSelect": "Product type",
+    "tableHeaders": {
+      "header": "Header",
+      "text": "Text",
+      "type": "Type",
+      "status": "Status"
+    },
     "productStatus": {
       "label": "Sale status",
       "withoutSale": "Without sale",

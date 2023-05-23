@@ -31,6 +31,12 @@
     "newButton": "Новий продукт",
     "productTitle": "Продукти",
     "inputProductTypeSelect": "Тип продукту",
+    "tableHeaders": {
+      "header": "Заголовок",
+      "text": "Текст",
+      "type": "Тип",
+      "status": "Статус"
+    },
     "productStatus": {
       "label": "Статус знижки",
       "withoutSale": "Знижки немає",
